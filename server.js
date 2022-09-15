@@ -1,8 +1,17 @@
-"scripts": {
- "start": "node server.js"
- },
- "dependencies": {
- "express": "^4.16.1",
- "validar-cpf": "^2.0.4"
- }
-}
+'use strict';
+const express = require('express');
+const validarCpf = require('validar-cpf');
+// Constants
+const PORT = (process.env.PORT || 8080);
+// App
+const app = express();
+app.get('/', (req, res) => {
+ res.send('Hello world!');
+});
+app.get('/validar/:cpf', (req, res) => {
+ var cpf = req.params.cpf;
+ res.send(validarCpf(cpf)+'\n');
+});
+ 
+app.listen(PORT);
+console.log(`Running listening on port ${PORT}`);
